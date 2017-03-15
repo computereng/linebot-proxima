@@ -3,6 +3,6 @@
   $parsed_json = json_decode($json_string);
   $location = $parsed_json->{'forecast'}->{'txt_forecast'}->{'forecastday'};
   //$temp_f = $parsed_json->{'current_observation'}->{'temp_f'};
-  echo ${location[0]}";
+  echo "${location[0]}";
 ?>
 
