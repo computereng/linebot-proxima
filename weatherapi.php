@@ -21,7 +21,7 @@ mysql_close($link);
   $pushmaxtemp = pg_escape_string($_POST['maxtempm']); 
   $pushmintemp = pg_escape_string($_POST['mintempm']); 
   $pushlocation = pg_escape_string($_POST['tzname']);
-  $query = ("INSERT INTO weather_proxima VALUES('$pushdate', '$pushmaxtemp', '$pushmintemp', '$pushlocation')");
+  $query = ("INSERT INTO weather_proxima VALUES('$pushdate', '$pushmaxtemp', '$pushmintemp', '$pushlocation');");
   $result = pg_query($query);
   if (!$result) { 
             $errormessage = pg_last_error(); 
