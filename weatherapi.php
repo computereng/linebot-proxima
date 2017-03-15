@@ -1,14 +1,14 @@
 <?php
 $dd = 15;
-$cdd = 1;
-for($cdd <= 5; $cdd++){
-  //$json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/history_201703".$dd."/q/TH/Bangkok.json");
+
+for($cdd = 1; $cdd <= 5; $cdd++){
+  $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/history_201703".$dd."/q/TH/Bangkok.json");
   /*$parsed_json = json_decode($json_string);
   $location = $parsed_json->{'location'}->{'city'};
   $temp_c = $parsed_json->{'current_observation'}->{'temp_c'};
   $local_time_rfc822 = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
   echo "Sussecc Current temperature in ${location} is: ${temp_c} on: ${dd}\n ";*/
-  echo $dd
+  echo $dd;
   $dd--;
 }
 
