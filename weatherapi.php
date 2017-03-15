@@ -8,7 +8,7 @@ for($cdd = 1; $cdd <= 5; $cdd++){
   $tzname = $parsed_json->{'history'}->{'dailysummary'}[0]->{'date'}->{'tzname'};
   $maxtempm = $parsed_json->{'history'}->{'dailysummary'}[0]->{'maxtempm'};
   $mintempm = $parsed_json->{'history'}->{'dailysummary'}[0]->{'mintempm'};
-  echo "Current temperature in ${tzname} maxtemp is: ${maxtempm} mintemp is: ${mintempm} on: ${date}/n";
+  echo "Current temperature in ${tzname} maxtemp is: ${maxtempm} mintemp is: ${mintempm} on: ${date}"<br>;
   $dd--;
 }
 
