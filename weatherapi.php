@@ -15,8 +15,7 @@ for($cdd = 1; $cdd <= 5; $cdd++){
  $db = pg_connect ("host=ec2-54-235-173-161.compute-1.amazonaws.com port=5432 dbname=davg135f89ndd9 user=nssvhpjghqgfui password=b32e79395f1d23198ce048097efca1604cf445e0fcabac8ae48f95b15ace1d81");
 if (!$db) {
     die('Could not connect: ' . mysql_error());
-}
-mysql_close($link);  
+}  
   $pushdate = pg_escape_string($_POST['date']); 
   $pushmaxtemp = pg_escape_string($_POST['maxtempm']); 
   $pushmintemp = pg_escape_string($_POST['mintempm']); 
