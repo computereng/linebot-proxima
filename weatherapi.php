@@ -11,7 +11,7 @@
   $date = pg_escape_string($_POST['local_time_rfc822']); 
   $temp = pg_escape_string($_POST['temp_c']); 
   $location = pg_escape_string($_POST['location']);
-  $query = INSERT INTO weather(date, temp, location) VALUES('" . $date . "', '" . $temp . "', '" . $location . "');
+  $query = 'INSERT INTO weather(date, temp, location) VALUES('" . $date . "', '" . $temp . "', '" . $location . "')';
   $result = pg_query($query);
   if (!$result) { 
             $errormessage = pg_last_error(); 
