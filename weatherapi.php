@@ -2,9 +2,10 @@
 $json_string = file_get_contents("http://api.wunderground.com/api/aded58d2c14cec26/forecast10day/q/TH/Bangkok.json");
   $parsed_json = json_decode($json_string);
   $data = $parsed_json->{'forecast'}->{'txt_forecast'}->{'forecastday'};
-print_r($data['period']['title']);
+  $check = $parsed_json->{'forecast'}->{'txt_forecast'}->{'forecastday'}->{'period'};
+print_r($data['period']);
   //$local_date = $parsed_json->{'forecast'}->{'txt_forecast'};
-//foreach($data['forecastday'] as $data['period']=>$value) {
+//foreach($data['period'] as $data[]) {
   //echo $period ;
   //$location = $parsed_json->{'location'}->{'city'};
   //$temp_c = $parsed_json->{'current_observation'}->{'temp_c'};
