@@ -2,7 +2,7 @@
 $dd = 15;
 $cdd = 1;
 for($cdd <= 5; $cdd++){
-  $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/history_201703".$dd."/q/TH/Bangkok.json");
+  //$json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/history_201703".$dd."/q/TH/Bangkok.json");
   /*$parsed_json = json_decode($json_string);
   $location = $parsed_json->{'location'}->{'city'};
   $temp_c = $parsed_json->{'current_observation'}->{'temp_c'};
