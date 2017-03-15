@@ -7,8 +7,8 @@ for($cdd = 1; $cdd <= 5; $cdd++){
   $pretty = $parsed_json->{'history'}->{'observations'};
   //$temp_c = $parsed_json->{'current_'}->{'temp_c'};
   //$local_time_rfc822 = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
-  echo $pretty;
-  echo $dd."\n";
+  $per = var_dump($pretty);
+  echo $per."\n";
   $dd--;
 }
 
