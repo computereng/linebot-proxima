@@ -3,7 +3,7 @@
   $parsed_json = json_decode($json_string);
   $location = $parsed_json->{'location'}->{'city'};
   $temp_f = $parsed_json->{'current_observation'}->{'temp_f'};
-  $local_time_rfc822 = $parsed_json->{'location'}->{'local_time_rfc822'};
+  $local_time_rfc822 = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
   echo "Current temperature in ${location} is: ${temp_f} on: ${local_time_rfc822}\n ";
 ?>
 
