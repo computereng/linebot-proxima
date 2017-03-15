@@ -4,11 +4,11 @@ $dd = 15;
 for($cdd = 1; $cdd <= 5; $cdd++){
   $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/history_201703".$dd."/q/TH/Bangkok.json");
   $parsed_json = json_decode($json_string);
-  $date = $parsed_json->{'history'}->{'dailysummary'}[0]->{'date'}->{'date'};
+  $date = $parsed_json->{'history'}->{'dailysummary'}[0]->{'date'}->{'pretty'};
   $tzname = $parsed_json->{'history'}->{'dailysummary'}[0]->{'date'}->{'tzname'};
-  $maxtempm = $parsed_json->{'history'}->{'dailysummary'}[0]->{'date'}->{'maxtempm'};
-  $mintempm = $parsed_json->{'history'}->{'dailysummary'}[0]->{'date'}->{'mintempm'};
-  echo "Current temperature in ${tzname} maxtemp is: ${maxtempm} mintemp is: ${mintempm} on: ${tzname}\n";
+  $maxtempm = $parsed_json->{'history'}->{'dailysummary'}[0]->{'maxtempm'};
+  $mintempm = $parsed_json->{'history'}->{'dailysummary'}[0]->{'mintempm'};
+  echo "Current temperature in ${tzname} maxtemp is: ${maxtempm} mintemp is: ${mintempm} on: ${date}\n";
   $dd--;
 }
 
