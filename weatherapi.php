@@ -4,4 +4,4 @@ $json_string = file_get_contents("http://api.wunderground.com/api/aded58d2c14cec
   $local_date = $parsed_json->{'forecast'}->{'simpleforecast'}->{'forecastday'}->{'date'};
   //$location = $parsed_json->{'location'}->{'city'};
   //$temp_c = $parsed_json->{'current_observation'}->{'temp_c'};
-  echo "Current temperature in ${local_date}";
+  echo "Current temperature in ${parsed_json}";
