@@ -16,10 +16,10 @@ for($cdd = 1; $cdd <= 5; $cdd++){
 if (!$db) {
     die('Could not connect: ' . mysql_error());
 }  
-  $pushdate = pg_escape_string($_POST['date']); 
-  $pushmaxtemp = pg_escape_string($_POST['maxtempm']); 
-  $pushmintemp = pg_escape_string($_POST['mintempm']); 
-  $pushlocation = pg_escape_string($_POST['tzname']);
+  $pushdate = pg_escape_string($date); 
+  $pushmaxtemp = pg_escape_string($maxtempm]); 
+  $pushmintemp = pg_escape_string($mintempm); 
+  $pushlocation = pg_escape_string($tzname]);
   $query = ("INSERT INTO weather_proxima VALUES('$pushdate', '$pushmaxtemp', '$pushmintemp', '$pushlocation');");
   $result = pg_query($query);
   if (!$result) { 
