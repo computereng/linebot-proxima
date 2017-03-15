@@ -4,7 +4,7 @@ $dd = 15;
 for($cdd = 1; $cdd <= 5; $cdd++){
   $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/history_201703".$dd."/q/TH/Bangkok.json");
   $parsed_json = json_decode($json_string);
-  $pretty = $parsed_json->{'history'}->{'observations'}->{'pretty};
+  $pretty = $parsed_json->{'history'}->{'observations'};
   //$temp_c = $parsed_json->{'current_'}->{'temp_c'};
   //$local_time_rfc822 = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
   var_dump($pretty);
