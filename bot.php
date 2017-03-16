@@ -65,7 +65,7 @@ if (!is_null($events['events'])) {
 				//select//
 			 $query = "DELETE FROM weather_botline_proxima"; 
        			 $result = pg_query($query);
-				$output = "  -:-History Get Weather-:-\n=======================\n";
+				$output = "ทำการลบประวัติเรียบร้อยแล้ว";
 			}
 			
 			//////////
