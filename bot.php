@@ -38,64 +38,87 @@ if (!is_null($events['events'])) {
 			if ($text == "คำสั่ง"){
 				//เก็บข้อความไว้ในตัวแปร output
 				$output = "========คำสั่งทั้งหมด=========\n|  weather  | เช็คสภาพอากาศปัจจุบัน\n|   history   | ดูประวัติการเช็คสภาพอากาศ\n|clearhistory| ล้างประวัติ\n========================";
+			$messages = [
+				'type' => 'text',
+				'text' => $output
+			];
+			$data = [
+				'replyToken' => $replyToken,
+				'messages' => [$messages],
+			];	
 			}
 			//ถ้าข้อความที่ส่งมาคือ "data"
 			if ($text == "weather"){
-			 //รับข้อมูล รูปแบบ Json จากเว็บพยากรอากาศ
-			 $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json");
-  			// Decode json
-			$parsed_json = json_decode($json_string);
-			//นำค่าจากข้อมูล Json ในเซ็ตของ current_observertion{local_time_rfc822} เก็บไว้ในตัวแปร อ่านค่าเซ็นได้จาก url ด้านบน
- 			 $date = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
-			 $temp_c = $parsed_json->{'current_observation'}->{'temp_c'};	
- 			 $weather = $parsed_json->{'current_observation'}->{'weather'};
- 			 $pressure = $parsed_json->{'current_observation'}->{'pressure_mb'};
-			 
-			//นำค่าพยาการอากาศที่ได้ เตรียมส่งขึ้น Database
-			$pushdate = pg_escape_string($date); 
-			$pushtemp = pg_escape_string($temp_c);
-  			$pushweather = pg_escape_string($weather); 
-  			$pushpressure = pg_escape_string($pressure); 
-			//นำข้อมูลที่จะเก็บไส้ใน Database ใส่่ในตัสแปร query
-  			$query = ("INSERT INTO weather_botline_proxima VALUES('$pushdate', '$pushtemp', '$pushweather', $pushpressure,'','');");
-  			//ส่งค่าไปยัง Database โดยเก็บไว้ในตาราง weather_botline_proxima
-			$result = pg_query($query);
-				//เก็บข้อความไว้ในตัวแปร output
-				$output = "Weather on\n ${date} \n=======================\nTemp is: ${temp_c}C \nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================= ";
+			 $query = "SELECT * FROM weather_botline ORDER BY pic DESC LIMIT 1"; 
+				$result = pg_query($query); 
+				if (!$result) { 
+					echo "Problem with query " . $query . "<br/>"; 
+					echo pg_last_error(); 
+					exit(); 
+				} 
+				while($myrow = pg_fetch_assoc($result)) { 
+					$output = "Weather on : ".$myrow['date']."\nTemp is : ".$myrow['tempc']."\nWeather is : ".$myrow['weather']."\nPressure is : ".$myrow['pressure']."\nHumidity is : ".$myrow['humidity'];					
+					$imagename = $myrow['image'];
+				} 
+				pg_close();
+				//////////
+				// Build message to reply back
+				$messages = [
+					'type' => 'text',
+					'text' => $output
+				];
+				$image = [
+					'type' => 'image',
+					"originalContentUrl" => "https://raw.githubusercontent.com/boatisdog/linebot-obsidian/master/pic/".$imagename.".jpg",
+					"previewImageUrl" => "https://raw.githubusercontent.com/boatisdog/linebot-obsidian/master/pic/".$imagename.".jpg"
+				];
+				$data = [
+					'replyToken' => $replyToken,
+					'messages' => [$messages, $image],
+				];
 			}
 			if ($text == "history"){
 			//นำคำสั่งที่จะใช้เก็บไว้ในตัวแปร query
-			 $query = "SELECT * FROM weather_botline_proxima"; 
+			 $query = "SELECT * FROM weather_botline"; 
 			//ทำการดึงข้อมูลจาก Database ใน table weather_botline_proxima	
        			 $result = pg_query($query); 
 			 $output = "  -:-History Get Weather-:-\n=======================\n";
            		 //ทำการนำข้อมูลออกมา โดยเรียงจากแถว บนสุดลงล่าง
 			while($myrow = pg_fetch_assoc($result)) { 
 				//เก็บไว้ในตัวแปร output
-              			$output = $output."Weather on : ".$myrow['date']."\nTemp is : ".$myrow['tempc']."\nWeather is : ".$myrow['weather']."\nPressure is : ".$myrow['pressure']."\n=======================\n";
+              			$output = $output."Weather on : ".$myrow['date']."\nTemp is : ".$myrow['tempc']."\nWeather is : ".$myrow['weather']."\nPressure is : ".$myrow['pressure']."\nHumidity : ".$myrow['Humidity']."\n=======================\n";
        			 } 
-			}
-			if ($text == "clearhistory"){
-			
-			 $query = "DELETE FROM weather_botline_proxima"; 
-			//ทำการเคลียข้อมูลทั้งในใน table weather_botline_proxima
-       			 $result = pg_query($query);
-				$output = "ทำการลบประวัติเรียบร้อยแล้ว";
-			}
-			//เตรียมข้อความที่จะส่งกลับไว้ในตัวแปร อาเรย์ messege
 			$messages = [
 				'type' => 'text',
 				'text' => $output
 			];
+			$data = [
+				'replyToken' => $replyToken,
+				'messages' => [$messages],
+			];	
+			}
+			if ($text == "clearhistory"){
+			
+			 $query = "DELETE FROM weather_botline"; 
+			//ทำการเคลียข้อมูลทั้งในใน table weather_botline_proxima
+       			 $result = pg_query($query);
+				$output = "ทำการลบประวัติเรียบร้อยแล้ว";
+			$messages = [
+				'type' => 'text',
+				'text' => $output
+			];
+			$data = [
+				'replyToken' => $replyToken,
+				'messages' => [$messages],
+			];	
+			}
+			//เตรียมข้อความที่จะส่งกลับไว้ในตัวแปร อาเรย์ messege
+			
 			//ยกเลิกการ Connect Database
 			pg_close();
 			//เก็บค่า link ของไลน์bot
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			//รวมข้อมูลทั้งหมดไว้ใน อาเรย์ data เตรียมเข้ารหัสเป็น Json
-			$data = [
-				'replyToken' => $replyToken,
-				'messages' => [$messages],
-			];
 			//เข้ารหัสเป็น Json เพื่อเตรียมส่งกลับไปใน line
 			$post = json_encode($data);
 			//สร้าง Header ในการส่งสำหรับ line
