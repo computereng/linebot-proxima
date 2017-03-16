@@ -27,20 +27,22 @@ if (!is_null($events['events'])) {
 			 $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json");
   			 $parsed_json = json_decode($json_string);
  			 $date = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
+			 $temp_c = $parsed_json->{'current_observation'}->{'temp_c'};	
  			 $weather = $parsed_json->{'current_observation'}->{'weather'};
  			 $pressure = $parsed_json->{'current_observation'}->{'pressure_mb'};
 			 
 			$pushdate = pg_escape_string($date); 
+			$pushtemp = pg_escape_string($temp_c);
   			$pushweather = pg_escape_string($weather); 
   			$pushpressure = pg_escape_string($pressure); 
-  			$query = ("INSERT INTO weather_proxima VALUES('$pushdate', '$pushweather', '$pushpressure', '','');");
+  			$query = ("INSERT INTO weather_botline_proxima VALUES('$pushdate', '$pushtemp', '$pushweather', $pushpressure,'','');");
   			$result = pg_query($query);
 			pg_close();
 			//////////
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => "Weather on\n ${date} \n=======================\nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================= "
+				'text' => "Weather on\n ${date} \n=======================\nTemp is: ${temp}C \nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================= "
 			];
 			}
 
