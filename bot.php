@@ -24,6 +24,9 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
+			if ($text == "คำสั่ง"){
+				$output = "====คำสั่งทั้งหมด====\n=================\n|    data     | เช็คสภาพอากาศปัจจุบัน\n|   history   | ดูประวัติการเช็คสภาพอากาศ\n|clearhistory | ล้างประวัติการเช็คสภาพอากาศ\n=================";
+			}
 			if ($text == "data"){
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//select//
@@ -41,8 +44,6 @@ if (!is_null($events['events'])) {
   			$query = ("INSERT INTO weather_botline_proxima VALUES('$pushdate', '$pushtemp', '$pushweather', $pushpressure,'','');");
   			$result = pg_query($query);
 				$output = "Weather on\n ${date} \n=======================\nTemp is: ${temp_c}C \nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================= ";
-				///////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
 			}
 			if ($text == "history"){
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
