@@ -31,9 +31,9 @@ if (!is_null($events['events'])) {
  			 $pressure = $parsed_json->{'current_observation'}->{'pressure_mb'};
 			 
 			$pushdate = pg_escape_string($date); 
-  			$pushmaxtemp = pg_escape_string($weather); 
-  			$pushmintemp = pg_escape_string($pressure); 
-  			$query = ("INSERT INTO weather_proxima VALUES('$date', '$weather', '$pressure', '','');");
+  			$pushweather = pg_escape_string($weather); 
+  			$pushpressure = pg_escape_string($pressure); 
+  			$query = ("INSERT INTO weather_proxima VALUES('$pushdate', '$pushweather', '$pushpressure', '','');");
   			$result = pg_query($query);
 			pg_close();
 			//////////
