@@ -22,7 +22,7 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
-			if ($text == "เหนื่อยไหม"){
+			if ($text == "data"){
 			//select//
 			 $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json");
   			 $parsed_json = json_decode($json_string);
