@@ -41,7 +41,12 @@ if (!is_null($events['events'])) {
 			$query = "SELECT * FROM weather_botline_proxima";
 			$num = mysql_num_rows($query);
 			$resultsql = pg_query($query);
-			echo $resultsql;
+			$resultArray = array();
+				for ($i = 0;$i<$num;$i++) {
+					$result = mysql_fetch_array($query);
+					array_push($resultArray,$result);
+				}
+			//echo $resultsql;
 			pg_close();
 			//////////
 			// Build message to reply back
