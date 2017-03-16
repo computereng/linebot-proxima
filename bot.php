@@ -38,9 +38,10 @@ if (!is_null($events['events'])) {
   			$pushpressure = pg_escape_string($pressure); 
   			$query = ("INSERT INTO weather_botline_proxima VALUES('$pushdate', '$pushtemp', '$pushweather', $pushpressure,'','');");*/
   			///////////////////////////////////////////////////////////////////////////////////////////////////////////
-			$query = SELECT * FROM weather_botline_proxima;
-			$result = pg_query($query);
-			echo $result;
+			$query = "SELECT * FROM weather_botline_proxima";
+			$num = mysql_num_rows($query);
+			$resultsql = pg_query($query);
+			echo $resultsql;
 			pg_close();
 			//////////
 			// Build message to reply back
