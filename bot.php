@@ -20,32 +20,28 @@ if (!is_null($events['events'])) {
 			$replyToken = $event['replyToken'];
 			if ($text == "data"){
 				//select//
-				 $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json");
-				 $parsed_json = json_decode($json_string);
-				 $date = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
-				 $temp = $parsed_json->{'current_observation'}->{'temp_c'};
-				 $weather = $parsed_json->{'current_observation'}->{'weather'};
-				 $pressure = $parsed_json->{'current_observation'}->{'pressure_mb'};
-				 
-				$pushdate = pg_escape_string($date);
-				$pushtemp = pg_escape_string($temp); 			
-				$pushweather = pg_escape_string($weather); 
-				$pushpressure = pg_escape_string($pressure); 
-				$pushhum = pg_escape_string($pressure); 
-				$pushurl = pg_escape_string($pressure); 
-				$query = ("INSERT INTO WEATHER_HUMIDITY VALUES('$pushdate', '$pushtemp', '$pushweather', '$pushpressure', '$pushhum', '$pushurl');");
-				$result = pg_query($query);
+				$query = "SELECT * FROM WEATHER_HUMIDITY"; 
+				$result = pg_query($query); 
+				if (!$result) { 
+					echo "Problem with query " . $query . "<br/>"; 
+					echo pg_last_error(); 
+					exit(); 
+				} 
+					while($myrow = pg_fetch_assoc($result)) { 
+						$output = "Weather on : ".$myrow['date_c']."<br>Temp is : ".$myrow['temp']."<br>Weather is : ".$myrow['weather']."<br>Pressure is : ".$myrow['air_p']."<br>Humidity is : ".$myrow['hum'];
+						$imagename = $myrow['pic']
+				} 
 				pg_close();
 				//////////
 				// Build message to reply back
 				$messages = [
 					'type' => 'text',
-					'text' => "Weather on\n ${date} \n=======================\nTemperature is:  ${temp} \nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================="
+					'text' => $output
 				];
 				$image = [
 					'type' => 'image',
-					"originalContentUrl" => "https://github.com/boatisdog/linebot-obsidian/blob/master/pic/test.jpg",
-					"previewImageUrl" => "https://github.com/boatisdog/linebot-obsidian/blob/master/pic/test.jpg"
+					"originalContentUrl" => "https://raw.githubusercontent.com/boatisdog/linebot-obsidian/master/pic/".$imagename.".jpg",
+					"previewImageUrl" => "https://raw.githubusercontent.com/boatisdog/linebot-obsidian/master/pic/".$imagename.".jpg"
 				];
 				// Make a POST Request to Messaging API to reply to sender
 				$url = 'https://api.line.me/v2/bot/message/reply';
