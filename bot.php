@@ -44,8 +44,8 @@ if (!is_null($events['events'])) {
 				];
 				$image = [
 					'type' => 'image',
-					"originalContentUrl" => "https://linebot-obsidian.herokuapp.com/pic/test.jpg",
-					"previewImageUrl" => "https://linebot-obsidian.herokuapp.com/pic/test.jpg"
+					"originalContentUrl" => "https://github.com/boatisdog/linebot-obsidian/blob/master/pic/test.jpg",
+					"previewImageUrl" => "https://github.com/boatisdog/linebot-obsidian/blob/master/pic/test.jpg"
 				];
 				// Make a POST Request to Messaging API to reply to sender
 				$url = 'https://api.line.me/v2/bot/message/reply';
