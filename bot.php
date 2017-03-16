@@ -129,4 +129,4 @@ if (!is_null($events['events'])) {
 		}
 	}
 }
-echo "$statusoutput;
+echo "OK";
