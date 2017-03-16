@@ -1,5 +1,5 @@
 <?php
- $status = readfile("webdictionary.txt");
+ $status = readfile("status.txt");
 if($stats == '1'){
 	$statusoutput = "ทำการรถน้ำ";
 }
