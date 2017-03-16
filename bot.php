@@ -40,7 +40,7 @@ if (!is_null($events['events'])) {
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => "Weather on ${date} \nis ${weather} and pressure is : ${pressure} "
+				'text' => "Weather on\n ${date} \n==============================\nWeather is:  ${weather} and Pressure is :  ${pressure}\n============================== "
 			];
 			}
 
