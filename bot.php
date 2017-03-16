@@ -59,8 +59,10 @@ if (!is_null($events['events'])) {
             			echo pg_last_error(); 
             			exit(); 
         		} 
+				$output = "History Get Weather\n";
            		 while($myrow = pg_fetch_assoc($result)) { 
-              			$output = "Weather on : ".$myrow['date']."\nTemp is : ".$myrow['tempc']."\nWeather is : ".$myrow['weather']."\nPressure is : ".$myrow['pressure'];
+				 
+              			$output += "Weather on : ".$myrow['date']."\nTemp is : ".$myrow['tempc']."\nWeather is : ".$myrow['weather']."\nPressure is : ".$myrow['pressure']."\n=======================\n";
             
        			 } 
 				///////////////////////////////////////////////////////////////////////////////////////////////////////////
