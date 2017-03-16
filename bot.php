@@ -1,5 +1,7 @@
 <?php
- echo readfile("status.txt");
+ $myfile = fopen("status.txt", "r") or die("Unable to open file!");
+echo fread($myfile,filesize("status.txt"));
+fclose($myfile);
 /*if($stats == '1'){
 	$statusoutput = "ทำการรถน้ำ";
 }
