@@ -38,20 +38,20 @@ if (!is_null($events['events'])) {
 				pg_close();
 				//////////
 				// Build message to reply back
-				//$messages = [
-				//	'type' => 'text',
-				//	'text' => "Weather on\n ${date} \n=======================\nTemperature is:  ${temp} \nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================="
-				//];
 				$messages = [
-					'type' => 'template',
-					'altText' => 'this is a buttons template',
-					'template' => ['type' => "buttons", 'thumbnailImageUrl' => "https://linebot-obsidian.herokuapp.com/pic/test.jpg", 'title' => "Menu", 'text' => "Weather on\n ${date} \n=======================\nTemperature is:  ${temp} \nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================="]
+					'type' => 'text',
+					'text' => "Weather on\n ${date} \n=======================\nTemperature is:  ${temp} \nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================="
+				];
+				$image = [
+					'type' => 'image',
+					"originalContentUrl" => "https://linebot-obsidian.herokuapp.com/pic/test.jpg",
+					"previewImageUrl" => "https://linebot-obsidian.herokuapp.com/pic/test.jpg"
 				];
 				// Make a POST Request to Messaging API to reply to sender
 				$url = 'https://api.line.me/v2/bot/message/reply';
 				$data = [
 					'replyToken' => $replyToken,
-					'messages' => [$messages],
+					'messages' => [$messages, $image],
 				];
 				$post = json_encode($data);
 				$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
