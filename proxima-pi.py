@@ -43,7 +43,7 @@ def main():
 			data_w = requests.get('http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json').json()
 			date = data_w['current_observation']['local_time_rfc822']
 			print(date)
-			temp = data_w['current_observation']['temp_c']
+			tempc = data_w['current_observation']['temp_c']
 			print(temp)
 			weather = data_w['current_observation']['weather']
 			print(weather)
@@ -51,7 +51,7 @@ def main():
 			print(pressure)
 			
 			with conn:
-				cur.execute("""INSERT INTO WEATHER_HUMIDITY( date, tempc, weather, pressure, humidity, image ) VALUES (%s, %s, %s, %s, %s, %s)""",(str(date), str(temp), str(weather), str(pressure), str(data[0]), str(pic_name)))
+				cur.execute("""INSERT INTO weather_botline( date, tempc, weather, pressure, humidity, image ) VALUES (%s, %s, %s, %s, %s, %s)""",(str(date), str(temp), str(weather), str(pressure), str(data[0]), str(pic_name)))
 				conn.commit()
 
 		except modbus_tk.modbus.ModbusError as exc:
