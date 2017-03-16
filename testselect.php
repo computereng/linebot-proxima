@@ -9,8 +9,10 @@ $db = pg_connect ("postgres://flghpbnnuhfevu:835ecb49bf0c74bc09716dbecdd8aa5df0f
             exit(); 
         } 
             while($myrow = pg_fetch_assoc($result)) { 
-            echo "Weather on : ".$myrow['date']."<br>Temp is : ".$myrow['tempc']."<br>Weather is : ".$myrow['weather']."<br>Pressure is : ".$myrow['pressure'];
+              $output = "Weather on : ".$myrow['date']."<br>Temp is : ".$myrow['tempc']."<br>Weather is : ".$myrow['weather']."<br>Pressure is : ".$myrow['pressure'];
+            
         } 
+echo $output;
 //<td>%s</td><td>%s</td><td>%s</td>   , htmlspecialchars($myrow['tempc']), htmlspecialchars($myrow['weather']), htmlspecialchars($myrow['pressure'])
 pg_close();
 ?>
