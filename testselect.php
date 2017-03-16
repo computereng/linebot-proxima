@@ -11,7 +11,7 @@ $db = pg_connect ("postgres://flghpbnnuhfevu:835ecb49bf0c74bc09716dbecdd8aa5df0f
         echo "=======================\n";
             while($myrow = pg_fetch_assoc($result)) { 
              // $output = "Weather on : ".$myrow['date']."<br>Temp is : ".$myrow['tempc']."<br>Weather is : ".$myrow['weather']."<br>Pressure is : ".$myrow['pressure'];
-            echo "|  "$myrow['date']. "  |  ".$myrow['tempc']."  |\n";
+            echo "|  ".$myrow['date']. "  |  ".$myrow['tempc']." ํc  |\n";
         } 
         echo "=======================\n";
 //echo $output;
