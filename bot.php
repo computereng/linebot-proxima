@@ -1,5 +1,11 @@
 <?php
-
+ $status = readfile("webdictionary.txt");
+if($stats == '1'){
+	$statusoutput = "ทำการรถน้ำ";
+}
+else if($stats == '2'){
+	$statusoutput = "หยุดการรถน้ำ";
+}
 //Connect to Line API
 $access_token = 'LZArldUUHwHc6ROvqoAeGz5Kdft2ShdvagfCoiaoPaTpxqjvtA4ImaLk6hbkVguSX6pqlYaJFRB/pLt/q/Ct5w4chCz8hShgIVBOzZYuYM1YPHg8FJ0KS4G8GD3T0iFv7qAbmBvIfFYElhJ+MRgXtQdB04t89/1O/w1cDnyilFU=';
 
@@ -106,4 +112,4 @@ if (!is_null($events['events'])) {
 		}
 	}
 }
-echo "OK";
+echo "$statusoutput;
