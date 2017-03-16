@@ -49,7 +49,30 @@ if (!is_null($events['events'])) {
 				'text' => "Weather on\n ${date} \n=======================\nTemp is: ${temp_c}C \nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================= "
 			];
 			}
-
+			if ($text == "history"){
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				//select//
+			 $query = "SELECT * FROM weather_botline_proxima"; 
+       			 $result = pg_query($query); 
+			if (!$result) { 
+           			echo "Problem with query " . $query . "<br/>"; 
+            			echo pg_last_error(); 
+            			exit(); 
+        		} 
+           		 while($myrow = pg_fetch_assoc($result)) { 
+              			$output = "Weather on : ".$myrow['date']."<br>Temp is : ".$myrow['tempc']."<br>Weather is : ".$myrow['weather']."<br>Pressure is : ".$myrow['pressure'];
+            
+       			 } 
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			//////////
+			// Build message to reply back
+			$messages = [
+				'type' => 'text',
+				'text' => $output
+			];
+			pg_close();
+			}
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
