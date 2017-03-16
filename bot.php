@@ -16,6 +16,7 @@ if (!is_null($events['events'])) {
 	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+			
 			// Get text sent
 			$text = $event['message']['text'];
 			// Get replyToken
@@ -23,12 +24,23 @@ if (!is_null($events['events'])) {
 
 			if ($text == "เหนื่อยไหม"){
 			//select//
-				
+			 $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json");
+  			 $parsed_json = json_decode($json_string);
+ 			 $date = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
+ 			 $weather = $parsed_json->{'current_observation'}->{'weather'};
+ 			 $pressure = $parsed_json->{'current_observation'}->{'pressure_mb'};
+			 
+			$pushdate = pg_escape_string($date); 
+  			$pushmaxtemp = pg_escape_string($weather); 
+  			$pushmintemp = pg_escape_string($pressure); 
+  			$query = ("INSERT INTO weather_proxima VALUES('$date', '$weather', '$pressure', '','');");
+  			$result = pg_query($query);
+			pg_close();
 			//////////
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => "สภาพอากาศวันนี้"
+				'text' => "Weather on ${date} \nis ${weather} and pressure is : ${pressure} "
 			];
 			}
 
