@@ -3,16 +3,16 @@ $access_token = 'LZArldUUHwHc6ROvqoAeGz5Kdft2ShdvagfCoiaoPaTpxqjvtA4ImaLk6hbkVgu
 
 //condb
 $db = pg_connect ("postgres://flghpbnnuhfevu:835ecb49bf0c74bc09716dbecdd8aa5df0ff7fa84bde3876dba031b27d632abf@ec2-75-101-142-182.compute-1.amazonaws.com:5432/d5mmu71c2lbm9o");
-$strdb = "SELECT * FROM weather_botline_proxima";
-			$query = pg_query($strdb);
-			$num = mysql_num_rows($query);
-			$resultArray = array();
-				for ($i = 0;$i<$num;$i++) {
-					$resultfe = mysql_fetch_array($query);
-					array_push($resultArray,$resultfe);
-				}
+	$strdb = "SELECT * FROM weather_botline_proxima";
+	$query = pg_query($strdb);
+	$num = mysql_num_rows($query);
+	$resultArray = array();
+	for ($i = 0;$i<=$num;$i++) {
+		$resultfe = mysql_fetch_array($query);
+		array_push($resultArray,$resultfe);
+	}
 			//echo $resultsql;
-			pg_close();
+pg_close();
 //
 // Get POST body content
 $content = file_get_contents('php://input');
