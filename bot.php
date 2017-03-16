@@ -23,8 +23,9 @@ if (!is_null($events['events'])) {
 			$replyToken = $event['replyToken'];
 
 			if ($text == "data"){
-			//select//
-			 $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json");
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				//select//
+			/* $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json");
   			 $parsed_json = json_decode($json_string);
  			 $date = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
 			 $temp_c = $parsed_json->{'current_observation'}->{'temp_c'};	
@@ -35,8 +36,11 @@ if (!is_null($events['events'])) {
 			$pushtemp = pg_escape_string($temp_c);
   			$pushweather = pg_escape_string($weather); 
   			$pushpressure = pg_escape_string($pressure); 
-  			$query = ("INSERT INTO weather_botline_proxima VALUES('$pushdate', '$pushtemp', '$pushweather', $pushpressure,'','');");
-  			$result = pg_query($query);
+  			$query = ("INSERT INTO weather_botline_proxima VALUES('$pushdate', '$pushtemp', '$pushweather', $pushpressure,'','');");*/
+  			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			$query = SELECT * FROM weather_botline_proxima;
+			$result = pg_query($query);
+			echo $result;
 			pg_close();
 			//////////
 			// Build message to reply back
