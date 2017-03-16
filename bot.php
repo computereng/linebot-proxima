@@ -20,7 +20,7 @@ if (!is_null($events['events'])) {
 			$replyToken = $event['replyToken'];
 			if ($text == "data"){
 				//select//
-				$query = "SELECT * FROM WEATHER_HUMIDITY"; 
+				$query = "SELECT * FROM WEATHER_HUMIDITY ORDER BY pic DESC LIMIT 1"; 
 				$result = pg_query($query); 
 				if (!$result) { 
 					echo "Problem with query " . $query . "<br/>"; 
