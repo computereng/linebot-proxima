@@ -40,14 +40,9 @@ if (!is_null($events['events'])) {
   			$pushpressure = pg_escape_string($pressure); 
   			$query = ("INSERT INTO weather_botline_proxima VALUES('$pushdate', '$pushtemp', '$pushweather', $pushpressure,'','');");
   			$result = pg_query($query);
+				$output = "Weather on\n ${date} \n=======================\nTemp is: ${temp_c}C \nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================= ";
 				///////////////////////////////////////////////////////////////////////////////////////////////////////////
-			pg_close();
-			//////////
-			// Build message to reply back
-			$messages = [
-				'type' => 'text',
-				'text' => "Weather on\n ${date} \n=======================\nTemp is: ${temp_c}C \nWeather is:  ${weather} \nPressure is :  ${pressure}\n======================= "
-			];
+			
 			}
 			if ($text == "history"){
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,11 +56,16 @@ if (!is_null($events['events'])) {
         		} 
 				$output = "  -:-History Get Weather-:-\n=======================\n";
            		 while($myrow = pg_fetch_assoc($result)) { 
-				 
               			$output = $output."Weather on : ".$myrow['date']."\nTemp is : ".$myrow['tempc']."\nWeather is : ".$myrow['weather']."\nPressure is : ".$myrow['pressure']."\n=======================\n";
-            
        			 } 
-				///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			}
+			if ($text == "clearhistory"){
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				//select//
+			 $query = "DELETE FROM weather_botline_proxima"; 
+       			 $result = pg_query($query);
+				$output = "  -:-History Get Weather-:-\n=======================\n";
+			}
 			
 			//////////
 			// Build message to reply back
@@ -74,7 +74,6 @@ if (!is_null($events['events'])) {
 				'text' => $output
 			];
 			pg_close();
-			}
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
