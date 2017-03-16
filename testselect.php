@@ -9,7 +9,7 @@ $db = pg_connect ("postgres://flghpbnnuhfevu:835ecb49bf0c74bc09716dbecdd8aa5df0f
             exit(); 
         } 
             while($myrow = pg_fetch_assoc($result)) { 
-            printf ( $myrow['date'], htmlspecialchars($myrow['tempc']), htmlspecialchars($myrow['weather']), htmlspecialchars($myrow['pressure']"<br>"));
+            printf ( $myrow['date'], htmlspecialchars($myrow['tempc']), htmlspecialchars($myrow['weather']), htmlspecialchars($myrow['pressure'])<br>);
         } 
 pg_close();
 ?>
