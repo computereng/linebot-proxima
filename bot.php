@@ -3,12 +3,8 @@ $access_token = 'LZArldUUHwHc6ROvqoAeGz5Kdft2ShdvagfCoiaoPaTpxqjvtA4ImaLk6hbkVgu
 
 //condb
 $db = pg_connect ("postgres://flghpbnnuhfevu:835ecb49bf0c74bc09716dbecdd8aa5df0ff7fa84bde3876dba031b27d632abf@ec2-75-101-142-182.compute-1.amazonaws.com:5432/d5mmu71c2lbm9o");
-	$query = "SELECT * FROM weather_botline_proxima";
-	$customer = $this->db->query($query)->result();
-	echo $customer;
-	}
 			//echo $resultsql;
-pg_close();
+
 //
 // Get POST body content
 $content = file_get_contents('php://input');
@@ -31,7 +27,7 @@ if (!is_null($events['events'])) {
 			if ($text == "data"){
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//select//
-			/* $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json");
+			 $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json");
   			 $parsed_json = json_decode($json_string);
  			 $date = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
 			 $temp_c = $parsed_json->{'current_observation'}->{'temp_c'};	
@@ -42,9 +38,10 @@ if (!is_null($events['events'])) {
 			$pushtemp = pg_escape_string($temp_c);
   			$pushweather = pg_escape_string($weather); 
   			$pushpressure = pg_escape_string($pressure); 
-  			$query = ("INSERT INTO weather_botline_proxima VALUES('$pushdate', '$pushtemp', '$pushweather', $pushpressure,'','');");*/
-  			///////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
+  			$query = ("INSERT INTO weather_botline_proxima VALUES('$pushdate', '$pushtemp', '$pushweather', $pushpressure,'','');");
+  			$result = pg_query($query);
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			pg_close();
 			//////////
 			// Build message to reply back
 			$messages = [
