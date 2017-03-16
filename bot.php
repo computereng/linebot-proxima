@@ -32,7 +32,7 @@ if (!is_null($events['events'])) {
 				$output = "========คำสั่งทั้งหมด=========\n|    data     | เช็คสภาพอากาศปัจจุบัน\n|   history   | ดูประวัติการเช็คสภาพอากาศ\n|clearhistory| ล้างประวัติ\n========================";
 			}
 			//ถ้าข้อความที่ส่งมาคือ "data"
-			if ($text == "data"){
+			if ($text == "weather"){
 			 //รับข้อมูล รูปแบบ Json จากเว็บพยากรอากาศ
 			 $json_string = file_get_contents("http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json");
   			// Decode json
