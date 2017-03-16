@@ -28,8 +28,8 @@ if (!is_null($events['events'])) {
 					exit(); 
 				} 
 					while($myrow = pg_fetch_assoc($result)) { 
-						$output = "Weather on : ".$myrow['date_c']."<br>Temp is : ".$myrow['temp']."<br>Weather is : ".$myrow['weather']."<br>Pressure is : ".$myrow['air_p']."<br>Humidity is : ".$myrow['hum'];
-						$imagename = $myrow['pic']
+						$output = "Weather on : ".$myrow['date_c']."\nTemp is : ".$myrow['temp']."\nWeather is : ".$myrow['weather']."\nPressure is : ".$myrow['air_p']."\nHumidity is : ".$myrow['hum'];
+						$imagename = $myrow['pic'];
 				} 
 				pg_close();
 				//////////
