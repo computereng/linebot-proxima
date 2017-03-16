@@ -1,11 +1,11 @@
 <?php
- $status = readfile("status.txt");
-if($stats == '1'){
+ echo readfile("status.txt");
+/*if($stats == '1'){
 	$statusoutput = "ทำการรถน้ำ";
 }
 else if($stats == '2'){
 	$statusoutput = "หยุดการรถน้ำ";
-}
+}*/
 //Connect to Line API
 $access_token = 'LZArldUUHwHc6ROvqoAeGz5Kdft2ShdvagfCoiaoPaTpxqjvtA4ImaLk6hbkVguSX6pqlYaJFRB/pLt/q/Ct5w4chCz8hShgIVBOzZYuYM1YPHg8FJ0KS4G8GD3T0iFv7qAbmBvIfFYElhJ+MRgXtQdB04t89/1O/w1cDnyilFU=';
 
@@ -108,7 +108,7 @@ if (!is_null($events['events'])) {
 			$result = curl_exec($ch);
 			curl_close($ch);
 
-			echo $result . "\r\n";
+			//echo $result . "\r\n";
 		}
 	}
 }
