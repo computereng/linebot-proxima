@@ -20,7 +20,7 @@ if (!is_null($events['events'])) {
 			$replyToken = $event['replyToken'];
 			if ($text == "data"){
 				//select//
-				$query = "SELECT * FROM weather_botline_proxima"; 
+				$query = "SELECT * FROM WEATHER_HUMIDITY"; 
 				$result = pg_query($query); 
 				if (!$result) { 
 					echo "Problem with query " . $query . "<br/>"; 
@@ -31,12 +31,6 @@ if (!is_null($events['events'])) {
 						$output = "Weather on : ".$myrow['date_c']."<br>Temp is : ".$myrow['temp']."<br>Weather is : ".$myrow['weather']."<br>Pressure is : ".$myrow['air_p']."<br>Humidity is : ".$myrow['hum'];
 						$imagename = $myrow['pic']
 				} 
-				$parsed_json = json_decode($json_string);
-				$date = $parsed_json->{'current_observation'}->{'local_time_rfc822'};
-				$temp = $parsed_json->{'current_observation'}->{'temp_c'};
-				$weather = $parsed_json->{'current_observation'}->{'weather'};
-				$pressure = $parsed_json->{'current_observation'}->{'pressure_mb'};
-
 				pg_close();
 				//////////
 				// Build message to reply back
