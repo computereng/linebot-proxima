@@ -8,5 +8,6 @@ $db = pg_connect ("postgres://flghpbnnuhfevu:835ecb49bf0c74bc09716dbecdd8aa5df0f
             echo pg_last_error(); 
             exit(); 
         } 
+            echo "success";
 pg_close();
 ?>
