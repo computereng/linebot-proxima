@@ -39,20 +39,19 @@ def main():
 			call('sudo git add pic/' + pic_name + '.jpg', shell=True)
 			call('sudo git commit -m "add picture"', shell=True)
 			call('sudo git push origin master', shell=True)
-			call('worawuth0', shell=True)
 
-			data_w = requests.get('http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json').json()
+			data_w = requests.get('http://api.wunderground.com/api/a6be6269233f1bc8/conditions/q/TH/nonthaburi.json').json()
 			date = data_w['current_observation']['local_time_rfc822']
 			print(date)
 			tempc = data_w['current_observation']['temp_c']
-			print(temp)
+			print(tempc)
 			weather = data_w['current_observation']['weather']
 			print(weather)
 			pressure = data_w['current_observation']['pressure_mb']
 			print(pressure)
 			
 			with conn:
-				cur.execute("""INSERT INTO weather_botline( date, tempc, weather, pressure, humidity, image ) VALUES (%s, %s, %s, %s, %s, %s)""",(str(date), str(temp), str(weather), str(pressure), str(data[0]), str(pic_name)))
+				cur.execute("""INSERT INTO weather_botline( date, tempc, weather, pressure, humidity, image ) VALUES (%s, %s, %s, %s, %s, %s)""",(str(date), str(tempc), str(weather), str(pressure), str(data[0]), str(pic_name)))
 				conn.commit()
 
 		except modbus_tk.modbus.ModbusError as exc:
@@ -62,4 +61,4 @@ def main():
 
 		
 if __name__ == "__main__":
-	main()
+        main()
