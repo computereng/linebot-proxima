@@ -56,8 +56,8 @@ if (!is_null($events['events'])) {
 				];
 				$image = [
 					'type' => 'image',
-					"originalContentUrl" => "https://raw.githubusercontent.com/boatisdog/linebot-proxima/master/pic/".$imagename.".jpg",
-					"previewImageUrl" => "https://raw.githubusercontent.com/boatisdog/linebot-proxima/master/pic/".$imagename.".jpg"
+					"originalContentUrl" => "https://raw.githubusercontent.com/computereng/linebot-proxima/master/pic/".$imagename.".jpg",
+					"previewImageUrl" => "https://raw.githubusercontent.com/computereng/linebot-proxima/master/pic/".$imagename.".jpg"
 				];
 				$data = [
 					'replyToken' => $replyToken,
