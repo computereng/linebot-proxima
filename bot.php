@@ -41,7 +41,7 @@ if (!is_null($events['events'])) {
 			}
 			//ถ้าข้อความที่ส่งมาคือ "data"
 			if ($text == "weather"){
-			 $query = "SELECT * FROM weather_botline ORDER BY pic DESC LIMIT 1"; 
+			 $query = "SELECT * FROM weather_botline "; 
 				$result = pg_query($query); 
 				while($myrow = pg_fetch_assoc($result)) { 
 					$output = "Weather on : ".$myrow['date']."\nTemp is : ".$myrow['tempc']."\nWeather is : ".$myrow['weather']."\nPressure is : ".$myrow['pressure']."\nHumidity is : ".$myrow['humidity'];					
