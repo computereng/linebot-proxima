@@ -41,7 +41,7 @@ if (!is_null($events['events'])) {
 			}
 			//ถ้าข้อความที่ส่งมาคือ "data"
 			if ($text == "weather"){
-			 $query = "SELECT * FROM weather_botline "; 
+			 $query = "SELECT * FROM botlinefinal "; 
 				$result = pg_query($query); 
 				while($myrow = pg_fetch_assoc($result)) { 
 					$output = "Weather on : ".$myrow['date']."\nTemp is : ".$myrow['tempc']."\nWeather is : ".$myrow['weather']."\nPressure is : ".$myrow['pressure']."\nHumidity is : ".$myrow['humidity'];					
@@ -67,7 +67,7 @@ if (!is_null($events['events'])) {
 			}
 			if ($text == "history"){
 			//นำคำสั่งที่จะใช้เก็บไว้ในตัวแปร query
-			 $query = "SELECT * FROM weather_botline"; 
+			 $query = "SELECT * FROM botlinefinal"; 
 			//ทำการดึงข้อมูลจาก Database ใน table weather_botline_proxima	
        			 $result = pg_query($query); 
 			 $output = "  -:-History Get Weather-:-\n=======================\n";
