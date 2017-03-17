@@ -43,16 +43,11 @@ if (!is_null($events['events'])) {
 			if ($text == "weather"){
 			 $query = "SELECT * FROM weather_botline ORDER BY pic DESC LIMIT 1"; 
 				$result = pg_query($query); 
-				if (!$result) { 
-					echo "Problem with query " . $query . "<br/>"; 
-					echo pg_last_error(); 
-					exit(); 
-				} 
 				while($myrow = pg_fetch_assoc($result)) { 
 					$output = "Weather on : ".$myrow['date']."\nTemp is : ".$myrow['tempc']."\nWeather is : ".$myrow['weather']."\nPressure is : ".$myrow['pressure']."\nHumidity is : ".$myrow['humidity'];					
 					$imagename = $myrow['image'];
 				} 
-				pg_close();
+				
 				//////////
 				// Build message to reply back
 				$messages = [
@@ -61,13 +56,14 @@ if (!is_null($events['events'])) {
 				];
 				$image = [
 					'type' => 'image',
-					"originalContentUrl" => "https://raw.githubusercontent.com/boatisdog/linebot-obsidian/master/pic/".$imagename.".jpg",
-					"previewImageUrl" => "https://raw.githubusercontent.com/boatisdog/linebot-obsidian/master/pic/".$imagename.".jpg"
+					"originalContentUrl" => "https://raw.githubusercontent.com/boatisdog/linebot-proxima/master/pic/".$imagename.".jpg",
+					"previewImageUrl" => "https://raw.githubusercontent.com/boatisdog/linebot-proxima/master/pic/".$imagename.".jpg"
 				];
 				$data = [
 					'replyToken' => $replyToken,
 					'messages' => [$messages, $image],
 				];
+				pg_close();
 			}
 			if ($text == "history"){
 			//นำคำสั่งที่จะใช้เก็บไว้ในตัวแปร query
@@ -88,6 +84,7 @@ if (!is_null($events['events'])) {
 				'replyToken' => $replyToken,
 				'messages' => [$messages],
 			];	
+			pg_close();
 			}
 			if ($text == "clearhistory"){
 			
@@ -102,12 +99,12 @@ if (!is_null($events['events'])) {
 			$data = [
 				'replyToken' => $replyToken,
 				'messages' => [$messages],
-			];	
+			];
+			pg_close();
 			}
 			//เตรียมข้อความที่จะส่งกลับไว้ในตัวแปร อาเรย์ messege
 			
 			//ยกเลิกการ Connect Database
-			pg_close();
 			//เก็บค่า link ของไลน์bot
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			//รวมข้อมูลทั้งหมดไว้ใน อาเรย์ data เตรียมเข้ารหัสเป็น Json
