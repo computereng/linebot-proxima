@@ -39,6 +39,7 @@ def main():
 			call('sudo git add pic/' + pic_name + '.jpg', shell=True)
 			call('sudo git commit -m "add picture"', shell=True)
 			call('sudo git push origin master', shell=True)
+			call('worawuth0', shell=True)
 
 			data_w = requests.get('http://api.wunderground.com/api/a6be6269233f1bc8/conditions/astronomy/q/TH/Bangkok.json').json()
 			date = data_w['current_observation']['local_time_rfc822']
